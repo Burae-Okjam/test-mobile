@@ -1,16 +1,17 @@
 const container = document.getElementById('app');
 
+const SCALE_LABELS = ['전혀 아님', '약간 아님', '보통', '약간 그럼', '매우 그럼'];
+
 /** 질문 화면을 렌더링합니다. */
 export function renderQuestion(question, onAnswer) {
   container.innerHTML = `
     <div class="question">
       <p>${question.text}</p>
-      ${question.options
-        .map(
-          (opt, idx) =>
-            `<button class="answer" data-value="${idx}">${opt}</button>`
-        )
-        .join('')}
+      <div class="scale">
+        ${SCALE_LABELS.map(
+          (label, idx) => `<button class="answer" data-value="${idx + 1}">${label}</button>`
+        ).join('')}
+      </div>
     </div>
   `;
 
@@ -33,11 +34,13 @@ export function renderSubmit(onSubmit) {
 }
 
 /** 결과 화면을 렌더링합니다. */
-export function renderResult(type, description) {
-  const resultText = `${type} - ${description}`;
+export function renderResult(result) {
+  const { label, description, E, T } = result;
+  const resultText = `${label} - E ${E} / T ${T}`;
   container.innerHTML = `
     <div class="result">
-      <h2>${type}</h2>
+      <h2>${label}</h2>
+      <p>E ${E} / T ${T}</p>
       <p>${description}</p>
       <button id="share-btn" class="primary">공유하기</button>
       <button id="restart-btn" class="primary">다시하기</button>
@@ -66,4 +69,3 @@ export function renderResult(type, description) {
     .getElementById('restart-btn')
     .addEventListener('click', () => window.location.reload());
 }
-
