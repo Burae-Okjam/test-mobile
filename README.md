@@ -14,6 +14,7 @@ python -m http.server
 - `index.html` – 진입 페이지
 - `src/` – 스크립트 모듈 (API 연동, UI 렌더링 등)
 - `styles/` – 기본 스타일
+- 질문별 네비게이션 및 결과 공유 기능 포함
 
 ## 테스트
 
