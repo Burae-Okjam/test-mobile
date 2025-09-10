@@ -48,6 +48,16 @@ export function renderResult(result) {
   `;
 
   document.getElementById('share-btn').addEventListener('click', async () => {
+    try {
+      const canvas = await html2canvas(document.querySelector('.result'));
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'result.png';
+      link.click();
+    } catch (err) {
+      console.error(err);
+    }
+
     const shareData = {
       title: '에겐/테토 테스트 결과',
       text: resultText,
