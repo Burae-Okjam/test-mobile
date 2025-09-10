@@ -33,10 +33,12 @@ export function renderSubmit(onSubmit) {
 }
 
 /** 결과 화면을 렌더링합니다. */
-export function renderResult(resultText) {
+export function renderResult(type, description) {
+  const resultText = `${type} - ${description}`;
   container.innerHTML = `
     <div class="result">
-      <p>${resultText}</p>
+      <h2>${type}</h2>
+      <p>${description}</p>
       <button id="share-btn" class="primary">공유하기</button>
       <button id="restart-btn" class="primary">다시하기</button>
     </div>
